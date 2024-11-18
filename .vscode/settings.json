@@ -17,5 +17,9 @@
     "yarn-error.log": true,
     "pkg/**/.shell": true,
     "pkg/**/node_modules": true,
-  }
+  },
+  "cSpell.words": [
+    "ollama",
+    "SGPT"
+  ]
 }

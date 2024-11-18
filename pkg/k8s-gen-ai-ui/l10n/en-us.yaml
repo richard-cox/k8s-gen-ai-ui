@@ -1,0 +1,18 @@
+typeLabel:
+  core.k8sgpt.ai.k8sgpt: |-
+    {count, plural,
+      one { K8sGPT Config }
+      other { K8sGPT Config }
+    }
+  core.k8sgpt.ai.result: |-
+    {count, plural,
+      one { K8sGPT Result }
+      other { K8sGPT Results }
+    }
+results:
+  table: 
+    result-column:
+      name: 'Resource Name'
+pod:
+  result:
+    tab-label: K8S GPT Result
