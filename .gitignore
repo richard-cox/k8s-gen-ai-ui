@@ -2,6 +2,7 @@
 /dist
 /tmp
 /out-tsc
+/dist-pkg
 
 # Runtime data
 pids

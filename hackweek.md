@@ -67,10 +67,17 @@ Inspiration - https://www.suse.com/c/rancher_blog/debugging-your-rancher-kuberne
         repository: ghcr.io/k8sgpt-ai/k8sgpt
         version: v0.3.41
      ```
-### Results
 
-If there are dodgy pods then there should be `core.k8sgpt.ai.result` / `Results` CR's created
-
+### K8sGPT Results
+- View k8sgpt operator controller-manager `pod` log `manager` container for worthwhile logs
+- View k8sgpt ollama `pod` log for details about the args used in k8sgtp analyse request
+- View ollama `pod` log for http request (and path) logs
+- If there are dodgy pods then there should be `core.k8sgpt.ai.result` / `Results` CR's created
+  - Examples i was using
+    - pod with container image all in caps
+    - pod with container image that does not exist
+    - pod that's broken https://raw.githubusercontent.com/robusta-dev/kubernetes-demos/main/crashpod/broken.yaml
+    - service with a selector not applicable to any pods (after adding service type to k8sgpt config object)
 
 ### Troubleshooting
 
@@ -81,21 +88,82 @@ If there are dodgy pods then there should be `core.k8sgpt.ai.result` / `Results`
 
 ### UI Extension
 
-Pretty straight forward
+- Create initial ui extension
+  - Added better labelling for k8sgpt resource types
+  - Added column in `core.k8sgpt.ai.result` table to link to target resource
+  - Added new tab in pod resource detail page containing simple text of issue
 
-- Added better labelling for k8sgpt resource types
-- Added column in `core.k8sgpt.ai.result` table to link to target resource
-- Added new tab in pod resource detail page containing simple text of issue
+## Day 2
+- Beefed Up ui extension
+  - Better tab formatting, display and content
+  - Better l10n
+  - Create a list override component for k8sgpt results table (better columns)
+  - Bring back k8sgpt result resource model
+  - Add tab and columns to service type
+  - Switch from BadgeStateFormatter to custom extension formatter for resource genai column badge
+- Resolved some extension issues around shell imports and build
+  - In a ts, or vue component with script ts, cannot import ts based files that haven't had type generated and shipped in shell (type-gen)
+  - shell/mixins/resource-fetch, @shell/plugins/steve/steve-class
+- Experimented with different resource types
+  - service
+    - picked up selector with no hits
+  - catalog.cattle.io.clusterrepo
+    - CRDs don't have analyzers - https://github.com/k8sgpt-ai/k8sgpt?tab=readme-ov-file#built-in-analyzers
+  - event
+    - didn't create any results (would this contribute info to other resources?)
+  - node
+    - didn't create any results (would this contribute info to other resources?)
 
-### Generic takeaways
-- There's pretty bad feedback on failure state from k8sgpt / operator.
-  - silently failing to talk to ollama just mean no detail. no error messages, failing conditions, etc anywhere
-  - CI - Dashboard - For workloads with multiple contains make it clearer that the log view covers both and user can switch between them 
-  - CI - Dashboard - The log view can really struggle with streams that print out 2/3 every second. Should the default no be 30 minute but 10k lines?
-- CI - Dashboard - Improve the ui extension getting started guide
-  - https://extensions.rancher.io/extensions/next/extensions-getting-started
-  - not an a --> b guide. introduced to a command at top, then random sidetrack on how to get a kube cluster up and running (doesn't need to be in guide), then arg info for command from above and different ways it can be used
-- CI - Dashboard - App Creator creates incorrect pkg annotations (> 3.0.0 but rancher > 2.9.3)
-- CI - Dashboard - Populate ts definitions for existing, documented types
-  - TableColumn
-- CI - Dashboard - Add info to extension point tabs to inform user the resource is a prop in the component. https://extensions.rancher.io/extensions/next/api/tabs
+## Day 3
+
+
+
+## TODO:
+- ~Resources other than pod?~
+- ~Resolve shell reference in model file~ ts --> js, or type-gen update
+- publish charts
+- screenshots
+- Vue3 version of extension
+- add other analysers? switch ai?
+- update config
+  - rename localai --> ollama
+  - anonymize false
+- custom analyzer? https://github.com/k8sgpt-ai/k8sgpt?tab=readme-ov-file#proceed-with-care  `Custom Analyzers`
+  - can this be configured with k8sgpt-operator?
+- notifications?  
+
+
+## Takeaways
+- K8SGTP / OLLAMA
+  - There's pretty bad feedback on failure state from k8sgpt / operator.
+    - silently failing to talk to ollama just meant no detail. no error messages, failing conditions, etc anywhere
+    - create rancher/dashboard issue
+      - For workloads with multiple contains make it clearer that the log view covers both and user can switch between them 
+      - The log view can really struggle with streams that print out 2/3 every second. Should the default no be 30 minute but 10k lines?
+  - Limited set of resource analysers, no smarts for CRs
+- Dashboard (to create issues)  
+  - Improve the ui extension getting started guide
+    - https://extensions.rancher.io/extensions/next/extensions-getting-started
+    - not an a --> b guide. introduced to a command at top, then random sidetrack on how to get a kube cluster up and running (doesn't need to be in guide), then arg info for command from above and different ways it can be used
+  - App Creator creates incorrect pkg annotations (> 3.0.0 but rancher > 2.9.3)
+  - Populate ts definitions for existing, documented types
+    - TableColumn
+  - Add info to extension point tabs to inform user the resource is a prop in the component. https://extensions.rancher.io/extensions/next/api/tabs
+  - Review 'starred' grouping. on return, nav around, etc annoying to have to continually re-open starred group
+  - Ability to specify order of column added to table
+  - Create types for additional js files (entries in type-gen, otherwise ts based files will fail to build)
+    - '@shell/mixins/resource-fetch'
+    - '@shell/plugins/steve/steve-class'
+  - Resource search should search on native name as well as label (authconfig vs Auth Provider)
+  - Resource search should search on partial string `crd` would match CustomResourceDefinition
+  - `/dist-pkg` should be added to extension app's package.json 
+  - Creating an extension for 2.9 is hard
+    - creator creates 3.x version
+    - lots of manual copy and paste
+    - build-extension-charts point to master, however changing to release-2.9 required additional tagged_release input
+  - No search in dev kit site
+- When creating the extension here's some of the reasons i had to switch to look at dashboard code
+  - what's passed through to tab component props
+  - formatters library
+  - how to get to store from column getValue
+  - had to look at code of BadgeStateFormatter to work out solution (arbitrary), STATES_ENUM

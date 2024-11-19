@@ -10,9 +10,20 @@ typeLabel:
       other { K8sGPT Results }
     }
 results:
-  table: 
-    result-column:
-      name: 'Resource Name'
-pod:
-  result:
-    tab-label: K8S GPT Result
+  table:
+    columns:
+      name: Result Name
+      object: Object
+      kind: Kind
+      backend: backend
+      lifecycle: lifecycle
+
+result-column:
+  label: GenAI State
+
+result-tab:
+  label: GenAI State
+  errors: Errors
+  details: Details
+  nativeLink: View Result YAML
+  noState: GenAI has not reported any state for this resource
