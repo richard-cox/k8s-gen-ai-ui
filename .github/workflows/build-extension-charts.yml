@@ -19,5 +19,5 @@ jobs:
       deployments: write
       pages: write
     with:
-      target_branch: release-2.9
+      target_branch: gh-pages
       tagged_release: ${{ github.ref_name }}

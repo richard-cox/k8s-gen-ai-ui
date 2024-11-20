@@ -160,9 +160,12 @@ Inspiration - https://www.suse.com/c/rancher_blog/debugging-your-rancher-kuberne
   - Creating an extension for 2.9 is hard
     - creator creates 3.x version
     - lots of manual copy and paste
-    - build-extension-charts point to master, however changing to release-2.9 required additional tagged_release input
+    - build-extension-charts point to master, however changing to release-2.9 required additional tagged_release input `tagged_release: ${{ github.ref_name }}` to `jobs ... with`
   - No search in dev kit site
-- When creating the extension here's some of the reasons i had to switch to look at dashboard code
+  - Not clear gh-pages needs to be created (step by step) https://extensions.rancher.io/extensions/next/publishing#proper-tagged-release-naming-scheme-to-build-extension-catalog-image
+  - Not clear how to add to rancher after chart created
+- When creating the extension here's some of the reasons i had to switch to look at 
+dashboard code
   - what's passed through to tab component props
   - formatters library
   - how to get to store from column getValue
