@@ -6,19 +6,11 @@
     "node": ">=20.0.0"
   },
   "dependencies": {
-    "@rancher/shell": "^3.0.0",
-    "@types/lodash": "4.14.184",
-    "core-js": "3.25.3",
-    "css-loader": "4.3.0"
-  },
-  "devDependencies": {
-    "@types/node": "18.11.9",
-    "@types/semver": "^7.5.8",
-    "semver": "^7.6.0"
+    "@rancher/shell": "^3.0.0"
   },
   "resolutions": {
-    "**/webpack": "4",
-    "glob": "7.2.3"
+    "@types/node": "~20.10.0",
+    "@types/lodash": "4.17.5"
   },
   "scripts": {
     "dev": "NODE_ENV=dev ./node_modules/.bin/vue-cli-service serve",

@@ -1,14 +1,13 @@
 {
   "name": "k8s-gen-ai-ui",
-  "description": "Integrate the output of k8s generative ai tool k8sgtp into Rancher",
-  "version": "2.0.2",
+  "description": "Integrate the output of k8s generative ai tool K8sGTP into Rancher",
+  "version": "3.0.0",
   "private": false,
   "rancher": {
     "annotations": {
       "catalog.cattle.io/display-name": "GenAI - K8sGTP",
       "catalog.cattle.io/rancher-version": ">= 2.10.0-0",
-      "catalog.cattle.io/ui-extensions-version": ">= 2.0.2 < 3",
-      "catalog.cattle.io/ui-extension-version": ">= 3.0.0"
+      "catalog.cattle.io/ui-extensions-version": ">= 3.0.0"
     }
   },
   "icon": "https://raw.githubusercontent.com/richard-cox/k8s-gen-ai-ui/release-2.9/pkg/k8s-gen-ai-ui/cow.svg",

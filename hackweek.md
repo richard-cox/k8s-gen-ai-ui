@@ -63,7 +63,7 @@ Inspiration - https://www.suse.com/c/rancher_blog/debugging-your-rancher-kuberne
           backend: localai
           baseUrl: http://10.43.118.68:11434/v1 # replace with ollama service endpoint
         noCache: false
-        filters: ["Pod"]
+        filters: ["Pod", "Service", "Event", "Node"]
         repository: ghcr.io/k8sgpt-ai/k8sgpt
         version: v0.3.41
      ```
@@ -116,7 +116,10 @@ Inspiration - https://www.suse.com/c/rancher_blog/debugging-your-rancher-kuberne
 
 ## Day 3
 - Built 2.9 UI extension charts (lots of issues)
-
+- Update ui extension to be 2.10 compatible
+- Bring up v2.10.0 to text extension with and setup env again
+  - v2.10.0 docker image doesn't seem healthy on my local box, keeps crashing. 
+    - due to disk pressure on node (aka ~/)
 
 
 ## TODO:
@@ -165,8 +168,24 @@ Inspiration - https://www.suse.com/c/rancher_blog/debugging-your-rancher-kuberne
   - No search in dev kit site
   - Not clear gh-pages needs to be created (step by step) https://extensions.rancher.io/extensions/next/publishing#proper-tagged-release-naming-scheme-to-build-extension-catalog-image
   - Not clear how to add to rancher after chart created
-  - Upgrade to vue3
+  - Upgrade to vue3 - did anyone go through this?? we did our extensions and wrote the guide....
+    - Doc not a clear step by step guide
     - Doc is missing step to update to 20 <= local node <= 22 https://extensions.rancher.io/extensions/next/rancher-2.10-support#how-to-proceed-with-your-extension-update
+    - migration script adds wrong annotation
+      - "catalog.cattle.io/ui-extension-version": ">= 3.0.0"
+      - should be `ui-extensions-version`
+    - Doc missing yarn install after migrate
+    - Then got an error, resolved by removing some stale references in core package.json (matching elemental-ui root package.json), nuking node_modules and yarn install
+      ```
+      ✔  Building for production as library (umd-min)...
+      ERROR  WebpackOptionsValidationError: Invalid configuration object. Webpack has been initialised using a configuration object that does not match the API schema.
+              - configuration[0].module.rules[8].type should be one of these:
+                "javascript/auto" | "javascript/dynamic" | "javascript/esm" | "json" | "webassembly/experimental"
+                -> Module type to use for the module
+      ```
+    - Then got TS errors weren't getting before
+      - due to ts component importing js component `component: { Loading }` --> `as any`
+  - 
 - When creating the extension here's some of the reasons i had to switch to look at 
 dashboard code
   - what's passed through to tab component props

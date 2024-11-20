@@ -6,8 +6,10 @@ import { Store } from 'vuex';
 
 
 export default defineComponent({
+  name: 'k8s-result-tab',
+
   components: {
-    Loading,
+    Loading: Loading as any,
   },
 
   props: {
@@ -57,15 +59,15 @@ export default defineComponent({
   <Loading v-if="$fetchState.pending" />
   <div v-else-if="result" class="text">
     <div v-if="result?.spec.error?.length" class="section errors ">
-      <h4 class="label"><i class="icon icon-lg icon-error text-error" /> {{t('result-tab.errors')}}: </h4>
-      <div class="content" v-for="e in result?.spec.error" v-clean-html="e.text.replaceAll('\n', '<br :key="e"><br>')"/>
+      <h4 class="label"><i class="icon icon-lg icon-error text-error" /> {{ t('result-tab.errors') }}: </h4>
+      <div class="content" v-for="e in result?.spec.error" v-clean-html="e.text.replaceAll('\n', '<br><br>')"/>
     </div>
     <div  class="section ">
-      <h4 class="label"><i class="icon icon-lg icon-info-circle text-info" /> {{t('result-tab.details')}}:</h4>
+      <h4 class="label"><i class="icon icon-lg icon-info-circle text-info" /> {{ t('result-tab.details') }}:</h4>
       <div class="content" v-clean-html="result?.spec.details.replaceAll('\n', '<br><br>')"/>
     </div>
     <div  class="section ">
-      <router-link v-if="resultLink" :to="resultLink" >{{t('result-tab.nativeLink')}}</router-link>
+      <router-link v-if="resultLink" :to="resultLink" >{{ t('result-tab.nativeLink') }}</router-link>
     </div>
   </div>
   <div v-else v-t="'result-tab.noState'"></div>
