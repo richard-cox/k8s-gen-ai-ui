@@ -50,18 +50,19 @@ Inspiration - https://www.suse.com/c/rancher_blog/debugging-your-rancher-kuberne
 3. Make note of Ollama service endpoint
    - ollama service in ollama ns
    - endpoint is target
-4. Tell K8SGPT to use ollama backend
+4. Tell K8SGPT to use ollama backend. Apply following yaml
    - ```
       apiVersion: core.k8sgpt.ai/v1alpha1
       kind: K8sGPT
       metadata:
         name: k8sgpt-ollama
+        namespace: k8sgpt-ollama
       spec:
         ai:
           enabled: true
           model: mistral
           backend: localai
-          baseUrl: http://10.43.118.68:11434/v1 # replace with ollama service endpoint
+          baseUrl: http://10.43.143.102:11434/v1 # replace with ollama service endpoint
         noCache: false
         filters: ["Pod", "Service", "Event", "Node"]
         repository: ghcr.io/k8sgpt-ai/k8sgpt
@@ -116,10 +117,12 @@ Inspiration - https://www.suse.com/c/rancher_blog/debugging-your-rancher-kuberne
 
 ## Day 3
 - Built 2.9 UI extension charts (lots of issues)
-- Update ui extension to be 2.10 compatible
+- Update ui extension to be 2.10 compatible (issues)
 - Bring up v2.10.0 to text extension with and setup env again
   - v2.10.0 docker image doesn't seem healthy on my local box, keeps crashing. 
-    - due to disk pressure on node (aka ~/)
+    - due to disk pressure on node (aka ~/). filelight to the rescue
+    - also due to ollama...
+  - brought up v2.10.0 in dev DO machine  
 
 
 ## TODO:
