@@ -41,7 +41,7 @@ Inspiration - https://www.suse.com/c/rancher_blog/debugging-your-rancher-kuberne
 1. Install K8SGPT operator
    - https://docs.k8sgpt.ai/getting-started/in-cluster-operator/
    - Add repo - https://charts.k8sgpt.ai/
-   - Install chart - k8sgpt-operator (in ns k8sgpt-operator-system) (0.2.0)
+   - Install chart - k8sgpt-operator (in ns k8sgpt-operator) (0.2.0)
 2. Install Ollama
    - https://artifacthub.io/packages/helm/ollama-helm/ollama
    - Add repo - https://otwld.github.io/ollama-helm/
@@ -56,13 +56,13 @@ Inspiration - https://www.suse.com/c/rancher_blog/debugging-your-rancher-kuberne
       kind: K8sGPT
       metadata:
         name: k8sgpt-ollama
-        namespace: k8sgpt-ollama
+        namespace: k8sgpt-operator
       spec:
         ai:
           enabled: true
           model: mistral
           backend: localai
-          baseUrl: http://10.43.143.102:11434/v1 # replace with ollama service endpoint
+          baseUrl: http://10.43.16.242:11434/v1 # replace with ollama service endpoint
         noCache: false
         filters: ["Pod", "Service", "Event", "Node"]
         repository: ghcr.io/k8sgpt-ai/k8sgpt
@@ -70,7 +70,7 @@ Inspiration - https://www.suse.com/c/rancher_blog/debugging-your-rancher-kuberne
      ```
 
 ### K8sGPT Results
-- View k8sgpt operator controller-manager `pod` log `manager` container for worthwhile logs
+- View k8sgpt operator controller-manager `pod` --> `manager` container log for worthwhile info
 - View k8sgpt ollama `pod` log for details about the args used in k8sgtp analyse request
 - View ollama `pod` log for http request (and path) logs
 - If there are dodgy pods then there should be `core.k8sgpt.ai.result` / `Results` CR's created
