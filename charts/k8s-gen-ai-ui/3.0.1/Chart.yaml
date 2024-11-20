@@ -1,0 +1,19 @@
+annotations:
+  catalog.cattle.io/certified: rancher
+  catalog.cattle.io/kube-version: '>= 1.16.0-0'
+  catalog.cattle.io/namespace: cattle-ui-plugin-system
+  catalog.cattle.io/os: linux
+  catalog.cattle.io/permits-os: linux, windows
+  catalog.cattle.io/rancher-version: '>= 2.10.0-0'
+  catalog.cattle.io/scope: management
+  catalog.cattle.io/ui-component: plugins
+  catalog.cattle.io/display-name: GenAI - K8sGTP
+  catalog.cattle.io/ui-extensions-version: '>= 3.0.0'
+apiVersion: v2
+appVersion: 3.0.1
+description: Integrate the output of k8s generative ai tool K8sGTP into Rancher
+name: k8s-gen-ai-ui
+type: application
+version: 3.0.1
+icon: >-
+  https://raw.githubusercontent.com/richard-cox/k8s-gen-ai-ui/release-2.9/pkg/k8s-gen-ai-ui/cow.svg
