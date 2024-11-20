@@ -6,23 +6,22 @@
   "rancher": {
     "annotations": {
       "catalog.cattle.io/display-name": "GenAI - K8sGTP",
-      "catalog.cattle.io/rancher-version": ">= v2.9.3 < 2.10.0",
-      "catalog.cattle.io/ui-extensions-version": ">= 2.0.2 < 3"
+      "catalog.cattle.io/rancher-version": ">= 2.10.0-0",
+      "catalog.cattle.io/ui-extensions-version": ">= 2.0.2 < 3",
+      "catalog.cattle.io/ui-extension-version": ">= 3.0.0"
     }
   },
   "icon": "https://raw.githubusercontent.com/richard-cox/k8s-gen-ai-ui/release-2.9/pkg/k8s-gen-ai-ui/cow.svg",
   "scripts": {},
   "engines": {
-    "node": ">=16"
+    "node": ">=20.0.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "5.0.8",
     "@vue/cli-service": "5.0.8",
     "@vue/cli-plugin-typescript": "5.0.8"
   },
-  "resolutions": {
-
-  },
+  "resolutions": {},
   "browserslist": [
     "> 1%",
     "last 2 versions",

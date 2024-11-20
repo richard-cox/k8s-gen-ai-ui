@@ -58,7 +58,7 @@ export default defineComponent({
   <div v-else-if="result" class="text">
     <div v-if="result?.spec.error?.length" class="section errors ">
       <h4 class="label"><i class="icon icon-lg icon-error text-error" /> {{t('result-tab.errors')}}: </h4>
-      <div class="content" v-for="e in result?.spec.error" v-clean-html="e.text.replaceAll('\n', '<br><br>')"/>
+      <div class="content" v-for="e in result?.spec.error" v-clean-html="e.text.replaceAll('\n', '<br :key="e"><br>')"/>
     </div>
     <div  class="section ">
       <h4 class="label"><i class="icon icon-lg icon-info-circle text-info" /> {{t('result-tab.details')}}:</h4>
