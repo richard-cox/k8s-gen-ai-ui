@@ -1,0 +1,21 @@
+{
+  "name": "k8s-gen-ai-ui",
+  "description": "Integrate the output of k8s generative ai tool k8sgtp into Rancher",
+  "version": "2.0.1",
+  "private": false,
+  "rancher": true,
+  "icon": "https://raw.githubusercontent.com/rancher/elemental-ui/release-2.9/pkg/k8s-gen-ai-ui/cow.svg",
+  "engines": {
+    "node": ">=16"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "5.0.8",
+    "@vue/cli-service": "5.0.8",
+    "@vue/cli-plugin-typescript": "5.0.8"
+  },
+  "resolutions": {},
+  "files": [
+    "**/*"
+  ],
+  "main": "k8s-gen-ai-ui-2.0.1.umd.min.js"
+}

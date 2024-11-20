@@ -1,0 +1,15 @@
+plugin/k8s-gen-ai-ui-2.0.1.umd.min.4.js
+plugin/k8s-gen-ai-ui-2.0.1.umd.min.4.js.map
+plugin/k8s-gen-ai-ui-2.0.1.umd.min.5.js
+plugin/k8s-gen-ai-ui-2.0.1.umd.min.5.js.map
+plugin/k8s-gen-ai-ui-2.0.1.umd.min.6.js
+plugin/k8s-gen-ai-ui-2.0.1.umd.min.6.js.map
+plugin/k8s-gen-ai-ui-2.0.1.umd.min.formatters.js
+plugin/k8s-gen-ai-ui-2.0.1.umd.min.formatters.js.map
+plugin/k8s-gen-ai-ui-2.0.1.umd.min.js
+plugin/k8s-gen-ai-ui-2.0.1.umd.min.js.map
+plugin/k8s-gen-ai-ui-2.0.1.umd.min.list.js
+plugin/k8s-gen-ai-ui-2.0.1.umd.min.list.js.map
+plugin/k8s-gen-ai-ui-2.0.1.umd.min.vendors~list.js
+plugin/k8s-gen-ai-ui-2.0.1.umd.min.vendors~list.js.map
+plugin/package.json
