@@ -115,13 +115,14 @@ Inspiration - https://www.suse.com/c/rancher_blog/debugging-your-rancher-kuberne
     - didn't create any results (would this contribute info to other resources?)
 
 ## Day 3
+- Built 2.9 UI extension charts (lots of issues)
 
 
 
 ## TODO:
 - ~Resources other than pod?~
 - ~Resolve shell reference in model file~ ts --> js, or type-gen update
-- publish charts
+- ~publish charts~
 - screenshots
 - Vue3 version of extension
 - add other analysers? switch ai?
@@ -164,6 +165,8 @@ Inspiration - https://www.suse.com/c/rancher_blog/debugging-your-rancher-kuberne
   - No search in dev kit site
   - Not clear gh-pages needs to be created (step by step) https://extensions.rancher.io/extensions/next/publishing#proper-tagged-release-naming-scheme-to-build-extension-catalog-image
   - Not clear how to add to rancher after chart created
+  - Upgrade to vue3
+    - Doc is missing step to update to 20 <= local node <= 22 https://extensions.rancher.io/extensions/next/rancher-2.10-support#how-to-proceed-with-your-extension-update
 - When creating the extension here's some of the reasons i had to switch to look at 
 dashboard code
   - what's passed through to tab component props
