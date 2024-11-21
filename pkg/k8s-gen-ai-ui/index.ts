@@ -53,24 +53,6 @@ export default function(plugin: IPlugin): void {
   // Provide plugin metadata from package.json
   plugin.metadata = require('./package.json');
 
-  // plugin.addTableColumn(TableColumnLocation.RESOURCE, {
-  //   resource: [K8SGPT_RESOURCES.RESULT],
-  // }, {
-  //   name: 'resource-link',
-  //   labelKey: 'results.table.result-column.name',
-  //   sort:          ['spec.name'],
-  //   search: ['spec.name'],
-  //   getValue: (r: K8sGptResult) => {
-  //     const [namespace, name] = r.spec.name.split('/')
-  //     return {  
-  //       kind: r.spec.kind,
-  //       name,
-  //       namespace,
-  //     }
-  //   },
-  //   formatter:     'InvolvedObjectLink',
-  // });
-
   plugin.addTableColumn(TableColumnLocation.RESOURCE, { resource: [POD, SERVICE] }, generateGenAiTableColumn());
   plugin.addTab(TabLocation.RESOURCE_DETAIL, { resource: [POD, SERVICE] }, generateGenAiTab())
 }

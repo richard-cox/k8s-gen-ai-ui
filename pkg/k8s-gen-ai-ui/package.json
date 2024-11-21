@@ -1,7 +1,7 @@
 {
   "name": "k8s-gen-ai-ui",
   "description": "Integrate the output of k8s generative ai tool K8sGTP into Rancher",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "private": false,
   "rancher": {
     "annotations": {

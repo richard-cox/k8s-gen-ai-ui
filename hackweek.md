@@ -124,21 +124,35 @@ Inspiration - https://www.suse.com/c/rancher_blog/debugging-your-rancher-kuberne
     - also due to ollama...
   - brought up v2.10.0 in dev DO machine  
 
+## Day 4
+- Half day working on day job things...
+- Add screenshots, tidy up, update project page, etc
 
-## TODO:
-- ~Resources other than pod?~
-- ~Resolve shell reference in model file~ ts --> js, or type-gen update
-- ~publish charts~
-- screenshots
-- Vue3 version of extension
-- add other analysers? switch ai?
-- update config
-  - rename localai --> ollama
-  - anonymize false
-- custom analyzer? https://github.com/k8sgpt-ai/k8sgpt?tab=readme-ov-file#proceed-with-care  `Custom Analyzers`
-  - can this be configured with k8sgpt-operator?
-- notifications?  
+## Screenshots
 
+### Extension Management
+![alt text](screenshots/1_extensions.png)
+
+### K8sGPT Results
+![alt text](screenshots/2_results.png)
+
+#### Result YAML
+![alt text](screenshots/3_result_yaml.png)
+
+### Pods View
+![alt text](screenshots/4_pods_view.png)
+
+#### Pod Detail View 1
+![alt text](screenshots/5_pod_view_1.png)
+
+#### Pod Detail View 2
+![alt text](screenshots/6_pod_view_2.png)
+
+### Services View
+![alt text](screenshots/7_services_view.png)
+
+#### Service Detail View
+![alt text](screenshots/8_service_view.png)
 
 ## Takeaways
 - K8SGTP / OLLAMA
@@ -195,3 +209,14 @@ dashboard code
   - formatters library
   - how to get to store from column getValue
   - had to look at code of BadgeStateFormatter to work out solution (arbitrary), STATES_ENUM
+
+## Next Steps
+- Add additional k8sgpt analysers, maybe create some for rancher CRDs
+  - https://github.com/k8sgpt-ai/k8sgpt?tab=readme-ov-file#proceed-with-care  `Custom Analyzers`
+  - can this be configured with k8sgpt-operator?
+- Try a different LLM other than ollama?
+- Minor Config Improvements 
+  - rename localai --> ollama
+  - set anonymize false
+- Improved UX
+  - Notifications for new / changes results?  

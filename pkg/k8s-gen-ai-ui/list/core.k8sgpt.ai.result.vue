@@ -1,6 +1,7 @@
-<script>
+<script >
 import { defineComponent } from 'vue';
 import ResourceTable from '@shell/components/ResourceTable.vue';
+// Note - cannot component cannot be type="ts" because line below has no typing so failing build (requires line in type-gen)
 import ResourceFetch from '@shell/mixins/resource-fetch';
 import {
   NAME as NAME_COL, AGE
@@ -10,7 +11,6 @@ export default defineComponent({
   name: 'k8sgpt-result-list',
 
   components: {
-    // Banner,
     ResourceTable
   },
 
@@ -53,7 +53,6 @@ export default defineComponent({
           sort: ['spec.kind'],
           search: ['spec.kind'],
         },
-        // STATE,
         {
           ...NAME_COL,
           labelKey: 'results.table.columns.name',
