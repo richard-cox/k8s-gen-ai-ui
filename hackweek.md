@@ -127,6 +127,7 @@ Inspiration - https://www.suse.com/c/rancher_blog/debugging-your-rancher-kuberne
 ## Day 4
 - Half day working on day job things...
 - Add screenshots, tidy up, update project page, etc
+- Creating dashboard issues....
 
 ## Screenshots
 
@@ -157,38 +158,47 @@ Inspiration - https://www.suse.com/c/rancher_blog/debugging-your-rancher-kuberne
 ## Takeaways
 - K8SGTP / OLLAMA
   - There's pretty bad feedback on failure state from k8sgpt / operator.
-    - silently failing to talk to ollama just meant no detail. no error messages, failing conditions, etc anywhere
+    - failure to communicate with ollama resulting in no error messages, failing conditions, etc. had to dive into logs to see failure
     - create rancher/dashboard issue
-      - For workloads with multiple contains make it clearer that the log view covers both and user can switch between them 
+      - For workloads with multiple contains make it clearer that the log view covers both and user can switch between them
+        - https://github.com/rancher/dashboard/issues/12643
       - The log view can really struggle with streams that print out 2/3 every second. Should the default no be 30 minute but 10k lines?
+        - https://github.com/rancher/dashboard/issues/12644
   - Limited set of resource analysers, no smarts for CRs
 - Dashboard (to create issues)  
-  - Improve the ui extension getting started guide
-    - https://extensions.rancher.io/extensions/next/extensions-getting-started
-    - not an a --> b guide. introduced to a command at top, then random sidetrack on how to get a kube cluster up and running (doesn't need to be in guide), then arg info for command from above and different ways it can be used
-  - App Creator creates incorrect pkg annotations (> 3.0.0 but rancher > 2.9.3)
-  - Populate ts definitions for existing, documented types
-    - TableColumn
-  - Add info to extension point tabs to inform user the resource is a prop in the component. https://extensions.rancher.io/extensions/next/api/tabs
-  - Review 'starred' grouping. on return, nav around, etc annoying to have to continually re-open starred group
-  - Ability to specify order of column added to table
-  - Create types for additional js files (entries in type-gen, otherwise ts based files will fail to build)
-    - '@shell/mixins/resource-fetch'
-    - '@shell/plugins/steve/steve-class'
-  - Resource search should search on native name as well as label (authconfig vs Auth Provider)
-  - Resource search should search on partial string `crd` would match CustomResourceDefinition
-  - `/dist-pkg` should be added to extension app's package.json 
-  - Creating an extension for 2.9 is hard
+  - Docs
+    - Improve the ui extension getting started guide - https://github.com/rancher/dashboard/issues/12649
+      - https://extensions.rancher.io/extensions/next/extensions-getting-started
+      - not an a --> b guide. introduced to a command at top, then random sidetrack on how to get a kube cluster up and running (doesn't need to be in guide), then arg info for command from above and different ways it can be used
+    - Populate ts definitions for existing, documented types - https://github.com/rancher/dashboard/issues/12650
+      - TableColumn
+    - Add info to extension point tabs to inform user the resource is a prop in the component. https://extensions.rancher.io/extensions/next/api/tabs.
+      - https://github.com/rancher/dashboard/issues/12651
+    - Create types for additional js files (entries in type-gen, otherwise ts based files will fail to build) - https://github.com/rancher/dashboard/issues/12652
+      - '@shell/mixins/resource-fetch'
+      - '@shell/plugins/steve/steve-class'
+    - No search in dev kit site
+      - https://github.com/rancher/dashboard/issues/12653
+    - publish guide - https://github.com/rancher/dashboard/issues/12654
+      - Not clear gh-pages needs to be created (step by step) https://extensions.rancher.io/extensions/next/publishing#proper-tagged-release-naming-scheme-to-build-extension-catalog-image
+      - Not clear how to add to rancher after chart created
+  - Creating App
+    - App Creator creates incorrect pkg annotations (> 3.0.0 but rancher > 2.9.3) - https://github.com/rancher/dashboard/issues/12635#issuecomment-2491509598
+  - Core Dashboard
+    - Review 'starred' grouping. on return, nav around, etc annoying to have to continually re-open starred group - https://github.com/rancher/dashboard/issues/12647
+    - Resource search should search on native name as well as label (authconfig vs Auth Provider) - https://github.com/rancher/dashboard/issues/12648
+    - Resource search should search on partial string `crd` would match CustomResourceDefinition - https://github.com/rancher/dashboard/issues/12648
+  - Extension Functionality
+    - Ability to specify order of column added to table - https://github.com/rancher/dashboard/issues/12646
+    - `/dist-pkg` should be added to extension app's package.json - https://github.com/rancher/dashboard/issues/12645
+  - Creating an extension for 2.9 is hard - https://github.com/rancher/dashboard/issues/12036
     - creator creates 3.x version
     - lots of manual copy and paste
     - build-extension-charts point to master, however changing to release-2.9 required additional tagged_release input `tagged_release: ${{ github.ref_name }}` to `jobs ... with`
-  - No search in dev kit site
-  - Not clear gh-pages needs to be created (step by step) https://extensions.rancher.io/extensions/next/publishing#proper-tagged-release-naming-scheme-to-build-extension-catalog-image
-  - Not clear how to add to rancher after chart created
-  - Upgrade to vue3 - did anyone go through this?? we did our extensions and wrote the guide....
+  - Upgrade to vue3 - https://github.com/rancher/dashboard/issues/12656
     - Doc not a clear step by step guide
     - Doc is missing step to update to 20 <= local node <= 22 https://extensions.rancher.io/extensions/next/rancher-2.10-support#how-to-proceed-with-your-extension-update
-    - migration script adds wrong annotation
+    - migration script adds wrong annotation - https://github.com/rancher/dashboard/issues/12655
       - "catalog.cattle.io/ui-extension-version": ">= 3.0.0"
       - should be `ui-extensions-version`
     - Doc missing yarn install after migrate
@@ -202,7 +212,6 @@ Inspiration - https://www.suse.com/c/rancher_blog/debugging-your-rancher-kuberne
       ```
     - Then got TS errors weren't getting before
       - due to ts component importing js component `component: { Loading }` --> `as any`
-  - 
 - When creating the extension here's some of the reasons i had to switch to look at 
 dashboard code
   - what's passed through to tab component props
@@ -211,12 +220,14 @@ dashboard code
   - had to look at code of BadgeStateFormatter to work out solution (arbitrary), STATES_ENUM
 
 ## Next Steps
-- Add additional k8sgpt analysers, maybe create some for rancher CRDs
-  - https://github.com/k8sgpt-ai/k8sgpt?tab=readme-ov-file#proceed-with-care  `Custom Analyzers`
-  - can this be configured with k8sgpt-operator?
-- Try a different LLM other than ollama?
-- Minor Config Improvements 
-  - rename localai --> ollama
-  - set anonymize false
-- Improved UX
-  - Notifications for new / changes results?  
+- The majority of time was spent on ui extension based activities. Next time i'd like to contribute more to actual k8sgtp output
+  - Add additional k8sgpt analysers, maybe create some for rancher CRDs
+    - https://github.com/k8sgpt-ai/k8sgpt?tab=readme-ov-file#proceed-with-care  `Custom Analyzers`
+    - can this be configured with k8sgpt-operator?
+  - Try a different LLM other than ollama?
+  - Minor Config Improvements 
+    - rename localai --> ollama
+    - set anonymize false
+- If time, to then move on to 
+  - Improved UX
+    - Notifications for new / changes results?  
